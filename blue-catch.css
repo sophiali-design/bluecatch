@@ -1,0 +1,32 @@
+/* Blue Catch case study: same layout as the other product case studies. */
+.project-detail.is-bc-detail .project-detail-layout { display: none; }
+.project-detail.is-bc-detail .project-detail-page { width: min(100%, 1240px); }
+.project-detail.is-bc-detail .project-detail-page > h2 { margin-bottom: clamp(38px, 5vh, 58px); }
+.bc-case { display: grid; row-gap: clamp(104px, 10vw, 148px); }
+.bc-case[hidden] { display: none; }
+.bc-case .bc-media { width: min(100%, 440px); justify-self: center; }
+
+/* Rotating model: plays on its own, drag to turn it */
+.bc-turntable { position: relative; width: min(100%, 440px); justify-self: center; margin: 0; background: #fff; border-radius: 6px; overflow: hidden; cursor: grab; touch-action: pan-y; user-select: none; }
+.bc-turntable.is-dragging { cursor: grabbing; }
+.bc-turntable canvas, .bc-turntable img { display: block; width: 100%; height: auto; pointer-events: none; }
+.bc-turntable.is-ready img { display: none; }
+.bc-turntable:not(.is-ready) canvas { display: none; }
+
+/* Gallery card: one model, rotating on its own (the still image underneath is the fallback) */
+.project-card[data-project="blue-catch"] .bc-card-art { position: relative; display: block; width: 100%; transition: filter .55s var(--ease), transform .65s var(--ease); }
+.project-card[data-project="blue-catch"] .bc-card-art > img { width: 100%; height: auto; transition: none; }
+.bc-card-spin { position: absolute; top: 0; bottom: 0; left: 50%; height: 100%; aspect-ratio: 600 / 805; transform: translateX(-50%); width: auto; margin: 0; background: #fff; border-radius: 0; cursor: inherit; pointer-events: none; }
+.bc-card-spin canvas { display: block; width: 100%; height: 100%; }
+.bc-card-spin:not(.is-ready) { visibility: hidden; }
+.project-slide.is-active .project-card[data-project="blue-catch"]:hover img,
+.project-slide.is-active .project-card[data-project="blue-catch"]:focus-visible img { filter: none; transform: none; }
+.project-slide.is-active .project-card[data-project="blue-catch"]:hover .bc-card-art,
+.project-slide.is-active .project-card[data-project="blue-catch"]:focus-visible .bc-card-art { filter: blur(13px) brightness(.48); transform: scale(1.045); }
+@media (max-width: 760px), (hover: none) {
+  .project-slide.is-active .project-card[data-project="blue-catch"]:hover .bc-card-art { filter: none; transform: none; }
+}
+
+/* Rod-screen board: a wider image column so the UI reads larger */
+.bc-screen-feature { grid-template-columns: minmax(0, 2.3fr) minmax(230px, .7fr); gap: clamp(36px, 4vw, 60px); }
+@media (max-width: 760px) { .bc-screen-feature { grid-template-columns: 1fr; } }
